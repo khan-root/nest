@@ -23,9 +23,9 @@ export class UsersController {
     }
 
 
-    @Get(':id')
-    getSingleUser(@Param('id') id:string){
-        console.log(id)
-        return {id}
+    @Get(':id/:postId')
+    getSingleUser(@Param('id') id:string, @Param('postId') postId: string ){
+        console.log(id, postId)
+        return {id, postId}
     }
 }
