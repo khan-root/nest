@@ -16,9 +16,7 @@ import { AuthModule } from './auth/auth.module';
       imports: [ConfigModule],
       useClass: MongoConfigService,
     }),
-
     UsersModule,
-
     AuthModule,
   ],
   controllers: [AppController],
