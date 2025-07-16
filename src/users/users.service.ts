@@ -6,7 +6,7 @@ import {
 import { InjectModel } from '@nestjs/mongoose';
 import { User, UserDocument } from './schemas/user-schema';
 import { Model } from 'mongoose';
-import { UserTypes } from 'src/utils/types';
+import { CreateUserDto } from './dtos/CreateUser.dto';
 
 @Injectable()
 export class UsersService {
@@ -15,7 +15,7 @@ export class UsersService {
     private UserModel: Model<UserDocument>,
   ) {}
 
-  async createNewUser(user: UserTypes): Promise<User> {
+  async createNewUser(user: CreateUserDto): Promise<User> {
     const userExists = await this.UserModel.findOne({
       userName: user.userName,
     });

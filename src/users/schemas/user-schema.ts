@@ -12,6 +12,12 @@ export class User {
 
   @Prop()
   avatar?: string;
+
+  @Prop({ unique: true, required: true })
+  email: string;
+
+  @Prop({ required: true })
+  password: string;
 }
 
 // 2. Create a Document type
