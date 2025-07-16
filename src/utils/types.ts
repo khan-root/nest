@@ -1,4 +1,5 @@
-export type User ={
-    name: string
-    email: string
-}
+export type UserTypes = {
+  userName: string;
+  displayName?: string;
+  avatar?: string;
+};
