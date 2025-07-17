@@ -1,7 +1,9 @@
 import {
   Body,
   Controller,
+  Delete,
   Get,
+  Param,
   Post,
   UseGuards,
   UsePipes,
@@ -30,5 +32,15 @@ export class TodosController {
   @Get('get-all')
   getAllTodos() {
     return this.todoService.getAllTodos();
+  }
+
+  @Get('get-by-user/:id')
+  getTodoByUser(@Param('id') id: string) {
+    return this.todoService.getTodoByUser(id);
+  }
+
+  @Delete('delete/:id')
+  deleteTodo(@Param('id') id: string) {
+    return this.todoService.deleteTodo(id);
   }
 }
