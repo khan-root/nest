@@ -34,8 +34,8 @@ export class TodosController {
   }
 
   @Get('get-all')
+  @UseGuards(JwtAuthGuard, RolesGuard)
   @Roles('admin')
-  @UseGuards(RolesGuard)
   getAllTodos() {
     return this.todoService.getAllTodos();
   }

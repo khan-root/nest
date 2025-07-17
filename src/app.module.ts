@@ -9,6 +9,32 @@ import { AuthModule } from './auth/auth.module';
 import { TodosModule } from './todos/todos.module';
 import { RolesGuard } from './auth/role.guard';
 import { APP_GUARD } from '@nestjs/core';
+import { JwtAuthGuard } from './auth/jwt.aut.guard';
+
+// @Module({
+//   imports: [
+//     ConfigModule.forRoot({
+//       isGlobal: true,
+//     }),
+//     MongooseModule.forRootAsync({
+//       imports: [ConfigModule],
+//       useClass: MongoConfigService,
+//     }),
+//     UsersModule,
+//     AuthModule,
+//     TodosModule,
+//   ],
+//   controllers: [AppController],
+//   providers: [
+//     AppService,
+//     MongoConfigService,
+//     {
+//       provide: APP_GUARD,
+//       useClass: RolesGuard,
+//     },
+//   ],
+// })
+// export class AppModule {}
 
 @Module({
   imports: [
@@ -29,7 +55,11 @@ import { APP_GUARD } from '@nestjs/core';
     MongoConfigService,
     {
       provide: APP_GUARD,
-      useClass: RolesGuard,
+      useClass: JwtAuthGuard, // This must come first
+    },
+    {
+      provide: APP_GUARD,
+      useClass: RolesGuard, // This comes second
     },
   ],
 })
