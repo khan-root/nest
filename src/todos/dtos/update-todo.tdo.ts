@@ -1,4 +1,4 @@
-import { IsBoolean, IsNotEmpty, IsOptional } from 'class-validator';
+import { IsBoolean, IsMongoId, IsNotEmpty, IsOptional } from 'class-validator';
 
 export class UpdateTodoTdo {
   @IsNotEmpty()
@@ -9,7 +9,7 @@ export class UpdateTodoTdo {
   @IsOptional()
   completed?: boolean;
 
-  @IsNotEmpty()
   @IsOptional()
+  @IsMongoId()
   assignedTo?: string;
 }

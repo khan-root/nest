@@ -4,6 +4,7 @@ import { Model } from 'mongoose';
 import { Todo, TodoDocument } from './schemas/todos-schema';
 import { InjectModel } from '@nestjs/mongoose';
 import { User, UserDocument } from 'src/users/schemas/user-schema';
+import { UpdateTodoTdo } from './dtos/update-todo.tdo';
 
 @Injectable()
 export class TodosService {
@@ -51,5 +52,20 @@ export class TodosService {
       throw new NotFoundException('Todo not found');
     }
     return { message: 'Todo deleted successfully' };
+  }
+
+  async updateTodo(
+    id: string,
+    updateTodoDto: UpdateTodoTdo,
+  ): Promise<{ message: string; todo: Todo }> {
+    const updatedTodo = await this.TodoModel.findByIdAndUpdate(
+      id,
+      updateTodoDto,
+      { new: true },
+    );
+    if (!updatedTodo) {
+      throw new NotFoundException('Todo not found');
+    }
+    return { message: 'Todo updated successfully', todo: updatedTodo as Todo };
   }
 }
