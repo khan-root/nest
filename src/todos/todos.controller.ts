@@ -16,6 +16,8 @@ import { TodosService } from './todos.service';
 import { getUser } from 'src/common/decotrators/get-user.decorator';
 import { UserDocument } from 'src/users/schemas/user-schema';
 import { UpdateTodoTdo } from './dtos/update-todo.tdo';
+import { RolesGuard } from 'src/auth/role.guard';
+import { Roles } from 'src/common/decotrators/user-role.decorator';
 
 @Controller('todos')
 @UseGuards(JwtAuthGuard)
@@ -32,6 +34,8 @@ export class TodosController {
   }
 
   @Get('get-all')
+  @Roles('admin')
+  @UseGuards(RolesGuard)
   getAllTodos() {
     return this.todoService.getAllTodos();
   }

@@ -14,6 +14,12 @@ export class Todo {
 
   @Prop({ type: Types.ObjectId, ref: 'User' })
   assignedTo?: string;
+
+  @Prop({ required: false })
+  startDate: Date;
+
+  @Prop({ required: false })
+  endDate: Date;
 }
 
 export type TodoDocument = Todo & Document;

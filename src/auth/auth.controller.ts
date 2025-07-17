@@ -35,10 +35,17 @@ export class AuthController {
     const payload = {
       _id: user._id,
       email: user.email,
+      role: user.role,
     };
     return {
       message: 'Login successful',
       access_token: this.jwtService.sign(payload),
     };
+  }
+
+  @Post('admin-register')
+  @UsePipes(new ValidationPipe())
+  adminRegister(@Body() registerDto: RegisterDto) {
+    return this.authService.adminRegister(registerDto);
   }
 }

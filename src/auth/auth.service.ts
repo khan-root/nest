@@ -10,6 +10,7 @@ import { Model } from 'mongoose';
 import { InjectModel } from '@nestjs/mongoose';
 import * as bcrypt from 'bcrypt';
 import { LoginDto } from './dto/login.dto';
+import { CreateUserDto } from 'src/users/dtos/CreateUser.dto';
 
 @Injectable()
 export class AuthService {
@@ -54,5 +55,26 @@ export class AuthService {
       throw new UnauthorizedException('Invalid password');
     }
     return findUser;
+  }
+
+  async adminRegister(
+    registerDto: RegisterDto,
+  ): Promise<{ message: string; user: UserDocument }> {
+    const { email } = registerDto;
+    const findUser = await this.UserModel.findOne({ email });
+    if (findUser) {
+      throw new ConflictException('User already exists');
+    }
+    const salt = await bcrypt.genSalt(10);
+    const hashedPassword = await bcrypt.hash(registerDto.password, salt);
+    const newUser = new this.UserModel({
+      ...registerDto,
+      password: hashedPassword,
+    });
+    await newUser.save();
+    return {
+      message: 'User created successfully',
+      user: newUser,
+    };
   }
 }

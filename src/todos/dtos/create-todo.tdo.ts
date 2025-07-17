@@ -1,4 +1,10 @@
-import { IsBoolean, IsMongoId, IsNotEmpty, IsOptional } from 'class-validator';
+import {
+  IsBoolean,
+  IsDate,
+  IsMongoId,
+  IsNotEmpty,
+  IsOptional,
+} from 'class-validator';
 
 export class CreateTodoDto {
   @IsNotEmpty()
@@ -15,4 +21,12 @@ export class CreateTodoDto {
   @IsOptional()
   @IsMongoId()
   assignedTo: string;
+
+  @IsOptional()
+  @IsDate()
+  startDate: Date;
+
+  @IsOptional()
+  @IsDate()
+  endDate: Date;
 }

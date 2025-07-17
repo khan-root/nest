@@ -7,6 +7,7 @@ export class CreateUserDto {
   @IsOptional()
   displayName?: string;
 
+
   @IsOptional()
   avatar?: string;
 }
