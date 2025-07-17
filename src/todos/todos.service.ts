@@ -39,7 +39,9 @@ export class TodosService {
     if (!findUser) {
       throw new NotFoundException('User not found');
     }
-    const todos = await this.TodoModel.find({ owner: id });
+    const todos = await this.TodoModel.find({
+      $or: [{ owner: id }, { assignedTo: id }],
+    });
     if (!todos) {
       throw new NotFoundException('Todos not found');
     }
