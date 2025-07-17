@@ -40,7 +40,7 @@ export class AuthService {
     };
   }
 
-  async validateUser(loginDto: LoginDto): Promise<User> {
+  async validateUser(loginDto: LoginDto): Promise<UserDocument> {
     const { email, password } = loginDto;
 
     const findUser = await this.UserModel.findOne({

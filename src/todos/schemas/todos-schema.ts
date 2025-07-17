@@ -9,7 +9,7 @@ export class Todo {
   @Prop({ default: false })
   completed: boolean;
 
-  @Prop({ type: Types.ObjectId, ref: 'User', required: true })
+  @Prop({ type: Types.ObjectId, ref: 'User' })
   owner: string;
 
   @Prop({ type: Types.ObjectId, ref: 'User' })
